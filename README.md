@@ -16,3 +16,10 @@ nohup python GenData.py --base_path ../all_video/ \
 --OUTPUT_DIR ../out \
 --TEMP_DIR ../tmpdir &
 ```
+
+## 3 Use struct2depth_eval
+
+https://github.com/go125/struct2depth_eval
+
+## 4 Use SfmLearner_eval
+
