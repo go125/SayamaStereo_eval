@@ -157,8 +157,8 @@ def make_dataset():
     number_list=[]
     for dataset in data_dirs:
         data_year="2020"
-        data_month="06"
-        data_date="27"
+        data_month="08"
+        data_date="04"
         #Please designate these three variables if you don't use KITTI dataset
         #The value is not important
         IMAGE_DIR=base_path + dataset+ "/"
@@ -167,18 +167,18 @@ def make_dataset():
         if not os.path.exists(OUTPUT_DIR1+"/"):
             os.makedirs(OUTPUT_DIR1+"/")
         make_dataset1(OUTPUT_DIR1,file_names,dataset,IMAGE_DIR,WIDTH,HEIGHT)
-        OUTPUT_DIR2= TEMP_DIR+data_year+"_"+data_month+"_"+data_date+"/"+dataset+'/image_03/data'
-        if not os.path.exists(OUTPUT_DIR2+"/"):
-            os.makedirs(OUTPUT_DIR2+"/")
-        make_mask_images(OUTPUT_DIR2,file_names,dataset,IMAGE_DIR,WIDTH,HEIGHT)
-        OUTPUT_TXT_FILE=TEMP_DIR+data_year+"_"+data_month+"_"+data_date+"/calib_cam_to_cam.txt"
-        shutil.copyfile(INPUT_TXT_FILE, OUTPUT_TXT_FILE)
+        #OUTPUT_DIR2= TEMP_DIR+data_year+"_"+data_month+"_"+data_date+"/"+dataset+'/image_03/data'
+        #if not os.path.exists(OUTPUT_DIR2+"/"):
+            #os.makedirs(OUTPUT_DIR2+"/")
+        #make_mask_images(OUTPUT_DIR2,file_names,dataset,IMAGE_DIR,WIDTH,HEIGHT)
+        #OUTPUT_TXT_FILE=TEMP_DIR+data_year+"_"+data_month+"_"+data_date+"/calib_cam_to_cam.txt"
+        #shutil.copyfile(INPUT_TXT_FILE, OUTPUT_TXT_FILE)
     
     
-    run_all(file_names)
-    TXT_RESULT_PATH=OUTPUT_DIR
-    with open(TXT_RESULT_PATH+"/train.txt", mode='w') as f:
-        f.write('\n'.join(number_list))
+    #run_all(file_names)
+    #TXT_RESULT_PATH=OUTPUT_DIR
+    #with open(TXT_RESULT_PATH+"/train.txt", mode='w') as f:
+        #f.write('\n'.join(number_list))
         
         
         
