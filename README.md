@@ -1,6 +1,12 @@
 # MINATOView
 
-## Input example (My City Report)
+## How to use
+
+## 1 Use ReadMovie.ipynb
+
+## 2 Use GenData.py (crop images)
+
+### Input example
 
 ```script
 nohup python GenData.py --base_path ../all_video/ \
