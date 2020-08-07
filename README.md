@@ -4,6 +4,8 @@
 
 ## 1 Use ReadMovie.ipynb
 
+30 fps video is converted to 10 fps. The video is cropped.
+
 ## 2 Use GenData.py (crop images)
 
 ### Input example
