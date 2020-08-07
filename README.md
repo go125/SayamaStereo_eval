@@ -11,12 +11,12 @@
 ### Input example
 
 ```script
-nohup python GenData.py --base_path ../all_video/ \
+nohup python GenData.py --base_path /home/ubuntu/Sayama/all_video/ \
 --ROOT_DIR ../Mask_RCNN \
 --WIDTH 416 \
 --HEIGHT 128 \
---OUTPUT_DIR ../out \
---TEMP_DIR ../tmpdir &
+--OUTPUT_DIR /home/ubuntu/Sayama/out \
+--TEMP_DIR /home/ubuntu/Sayama/tmpdir &
 ```
 
 ## 3 Use struct2depth_eval
