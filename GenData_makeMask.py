@@ -329,8 +329,8 @@ def run_all(file_names):
                 ct = 1               
                 calib_camera = calib_raw[0] if subfolder=='image_02/data' else calib_raw[1]
                 folder = d2 + subfolder
-                #files = glob.glob(folder + '/*.png')
-                files = glob.glob(folder + '/*.jpg')
+                files = glob.glob(folder + '/*.png')
+                #files = glob.glob(folder + '/*.jpg')
                 files = [file for file in files if not 'disp' in file and not 'flip' in file and not 'seg' in file]
                 files = sorted(files)
                 for i in range(SEQ_LENGTH, len(files)+1, STEPSIZE):
@@ -367,8 +367,8 @@ def run_all(file_names):
                 ct = 1
                 calib_camera = calib_raw[0] if subfolder=='image_02/data' else calib_raw[1]
                 folder = d2 + subfolder
-                #files = glob.glob(folder + '/*.png')
-                files = glob.glob(folder + '/*.jpg')
+                files = glob.glob(folder + '/*.png')
+                #files = glob.glob(folder + '/*.jpg')
                 files = [file for file in files if not 'disp' in file and not 'flip' in file and not 'seg' in file]
                 files = sorted(files)
                 for i in range(SEQ_LENGTH, len(files)+1, STEPSIZE):
