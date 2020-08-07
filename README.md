@@ -19,7 +19,7 @@ nohup python GenData.py --base_path /home/ubuntu/Sayama/all_video/ \
 --TEMP_DIR /home/ubuntu/Sayama/tmpdir &
 ```
 
-### Make Masks
+### Make Masks (for finetuning)
 
 "all video" dir should include only "video2top_png" dir.
 
