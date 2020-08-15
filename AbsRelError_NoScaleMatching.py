@@ -75,7 +75,7 @@ def abs_rel_error_single_image(i):
 	
 	
 	height=1.2
-	theta=0.1
+	theta=0.08
 	truth_z=height/math.sin(theta)
 	center=calc_center()
 	prezent_z=pred_depth[center[0]][center[1]]
