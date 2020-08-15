@@ -18,8 +18,8 @@ import pickle
 
 save_path = '/home/ubuntu/Sayama/tmpdir/2020_08_04/video1top_png/image_02/data/'
 #mask_path= = '/home/ubuntu/Sayama/tmpdir/2020_08_04/video1top_png/image_03/data/'
-depth_map_dir='/home/ubuntu/Sayama/result_video1top_273486/'
-#depth_map_dir='/home/ubuntu/Sayama/result_video1top_279296/'
+#depth_map_dir='/home/ubuntu/Sayama/result_video1top_273486/'
+depth_map_dir='/home/ubuntu/Sayama/result_video1top_279296/'
 ans_int_disp_map_dir="/home/ubuntu/Sayama/tmpdir/2020_08_04/video1middle_png/image_02/data"
 min_depth=5
 max_depth=80
