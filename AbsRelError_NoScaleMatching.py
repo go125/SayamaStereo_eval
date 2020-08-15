@@ -15,6 +15,7 @@ import pandas as pd
 import glob
 import matplotlib.pyplot as plt
 import pickle
+import math
 
 save_path = '/home/ubuntu/Sayama/tmpdir/2020_08_04/video1top_png/image_02/data/'
 #mask_path= = '/home/ubuntu/Sayama/tmpdir/2020_08_04/video1top_png/image_03/data/'
@@ -55,6 +56,12 @@ def draw_images_ans_int(image_file):
     ans_int_disp_map=cv2.cvtColor(ans_int_disp_map, cv2.COLOR_RGB2GRAY)
     return ans_int_disp_map
 
+def calc_center(xmin=0,ymin=0,img_height=128,img_width=416,clip_height=128,clip_width=416,dfv_height=128,dfv_width=416):
+    center_ratio_x=(img_height//2-xmin)/clip_height
+    center_ratio_y=(img_width//2-ymin)/clip_width
+    center_x=int(dfv_height*center_ratio_x)
+    center_y=int(dfv_width*center_ratio_y)
+    return [center_x,center_y]
 
 def abs_rel_error_single_image(i):
 	pred_depth=np.load(depth_map_dir+file_names[i] +'.npy')
@@ -67,7 +74,13 @@ def abs_rel_error_single_image(i):
 	mask = np.logical_and(gt_depth>min_depth,gt_depth <max_depth)
 	
 	
-	scalor=1
+	height=1.2
+	theta=85
+	theta=theta*math.pi/180
+	truth_z=height/math.cos(theta)
+	center=calc_center()
+	prezent_z=pred_depth[center[0]][center[1]]
+	scalor=truth_z/prezent_z
 	#scalor = np.median(gt_depth[mask])/np.median(pred_depth[mask])
 	scalors[i]=scalor
 
