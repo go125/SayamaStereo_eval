@@ -74,12 +74,13 @@ def abs_rel_error_single_image(i):
 	mask = np.logical_and(gt_depth>min_depth,gt_depth <max_depth)
 	
 	
-	height=1.2
-	theta=0.08
-	truth_z=height/math.sin(theta)
-	center=calc_center()
-	prezent_z=pred_depth[center[0]][center[1]]
-	scalor=truth_z/prezent_z
+	#height=1.2
+	#theta=0.08
+	#truth_z=height/math.sin(theta)
+	#center=calc_center()
+	#prezent_z=pred_depth[center[0]][center[1]]
+	#scalor=truth_z/prezent_z
+	scalor=1
 	#scalor = np.median(gt_depth[mask])/np.median(pred_depth[mask])
 	scalors[i]=scalor
 
