@@ -1,0 +1,141 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[1]:
+
+import numpy as np
+from xml.etree import ElementTree
+import cv2
+from PIL import Image
+import tensorflow as tf
+import csv
+import argparse
+import os
+import pandas as pd
+import glob
+import matplotlib.pyplot as plt
+import pickle
+
+save_path = '/home/ubuntu/Sayama/tmpdir/2020_08_04/video1top_png/image_02/data/'
+#mask_path= = '/home/ubuntu/Sayama/tmpdir/2020_08_04/video1top_png/image_03/data/'
+#depth_map_dir='/home/ubuntu/Sayama/result_video1top_273486/'
+depth_map_dir='/home/ubuntu/Sayama/result_video1top_279296/'
+ans_int_disp_map_dir="/home/ubuntu/Sayama/tmpdir/2020_08_04/video1middle_png/image_02/data"
+min_depth=5
+max_depth=80
+bf=109.65
+d_inf=2.67
+num_test=1
+i=0
+
+
+file_names=["frame_000250.png"]
+#for file in os.listdir(save_path):
+    # Getting File Names
+    #if os.path.isfile(os.path.join(save_path, file)):
+        #file_names.append(os.path.basename(file))
+
+def draw_images(image_file):    
+    global save_path    
+    f_name=save_path+"/"+image_file
+    gray_img=cv2.imread(f_name)
+    return gray_img
+
+
+
+file_names_2 = ["frame_000250"]
+#for file in os.listdir(save_path):
+    #if os.path.isfile(os.path.join(save_path, file)):
+        #file2 = file.rstrip('.png\n')
+        #file_names_2.append(file2)
+
+
+
+pred_depth=np.load(depth_map_dir+file_names_2[i] +'.npy')
+pred_depth = cv2.resize(pred_depth, (416,128))
+
+
+
+def draw_images_ans_int(image_file):
+    global ans_int_disp_map_dir    
+    f_name=ans_int_disp_map_dir+"/"+image_file
+    ans_int_disp_map=cv2.imread(f_name)
+    ans_int_disp_map=cv2.cvtColor(ans_int_disp_map, cv2.COLOR_RGB2GRAY)
+    return ans_int_disp_map
+
+
+gt_depth=bf/(ans_int_disp_map-d_inf)
+
+mask = np.logical_and(gt_depth>min_depth,gt_depth <max_depth)
+
+
+scalor = np.median(gt_depth[mask])/np.median(pred_depth[mask])
+
+pred_depth[mask] *= scalor
+
+
+pred_depth[pred_depth < min_depth] = min_depth
+pred_depth[pred_depth > max_depth] = max_depth
+
+
+
+def compute_errors(gt, pred):
+    thresh = np.maximum((gt / pred), (pred / gt))
+    a1 = (thresh < 1.25   ).mean()
+    a2 = (thresh < 1.25 ** 2).mean()
+    a3 = (thresh < 1.25 ** 3).mean()
+
+    rmse = (gt - pred) ** 2
+    rmse = np.sqrt(rmse.mean())
+
+    rmse_log = (np.log(gt) - np.log(pred)) ** 2
+    rmse_log = np.sqrt(rmse_log.mean())
+
+    abs_rel = np.mean(np.abs(gt - pred) / gt)
+    
+    sq_rel = np.mean(((gt - pred)**2) / gt)
+
+    return abs_rel, sq_rel, rmse, rmse_log, a1, a2, a3
+
+
+
+rms     = np.zeros(num_test, np.float32)
+log_rms = np.zeros(num_test, np.float32)
+abs_rel = np.zeros(num_test, np.float32)
+sq_rel  = np.zeros(num_test, np.float32)
+d1_all  = np.zeros(num_test, np.float32)
+a1      = np.zeros(num_test, np.float32)
+a2      = np.zeros(num_test, np.float32)
+a3      = np.zeros(num_test, np.float32)
+scalors = np.zeros(num_test, np.float32)
+
+abs_rel[i], sq_rel[i], rms[i], log_rms[i], a1[i], a2[i], a3[i] =             compute_errors(gt_depth[mask], pred_depth[mask])
+
+print("{:>10}, {:>10}, {:>10}, {:>10}, {:>10}, {:>10}, {:>10}, {:>10}, {:>10} ".format('abs_rel', 'sq_rel', 'rms', 'log_rms', 'd1_all', 'a1', 'a2', 'a3', 'scalor'))
+print("{:10.4f}, {:10.4f}, {:10.4f}, {:10.4f}, {:10.4f}, {:10.4f}, {:10.4f}, {:10.4f} ,{:10.4f} ".format(abs_rel.mean(), sq_rel.mean(), rms.mean(), log_rms.mean(), d1_all.mean(), a1.mean(), a2.mean(), a3.mean(),scalors.mean()))
+
+
+
+import math
+height=1.2
+theta=85
+theta=theta*math.pi/180
+
+truth_z=height/math.cos(theta)
+#print(truth_z)
+
+
+def calc_center(xmin=0,ymin=0,img_height=128,img_width=416,clip_height=128,clip_width=416,dfv_height=128,dfv_width=416):
+    center_ratio_x=(img_height//2-xmin)/clip_height
+    center_ratio_y=(img_width//2-ymin)/clip_width
+    center_x=int(dfv_height*center_ratio_x)
+    center_y=int(dfv_width*center_ratio_y)
+    return [center_x,center_y]
+
+center=calc_center()
+
+#print(center[0])
+#print(center[1])
+
+prezent_z=pred_depth[center[0]][center[1]]
+#これだとうまくいかない
