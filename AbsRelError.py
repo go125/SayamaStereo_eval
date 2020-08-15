@@ -25,21 +25,27 @@ min_depth=5
 max_depth=80
 bf=109.65
 d_inf=2.67
-num_test=1
-i=0
 
 
 file_names = ["frame_000250"]
+#file_names = []
 #for file in os.listdir(save_path):
     #if os.path.isfile(os.path.join(save_path, file)):
-        #file2 = file.rstrip('.png\n')
-        #file_names_2.append(file2)
+        #file_name = file.rstrip('.png\n')
+        #file_names.append(file_name)
 
 
+num_test=len(file_names)
 
-pred_depth=np.load(depth_map_dir+file_names[i] +'.npy')
-pred_depth = cv2.resize(pred_depth, (416,128))
-
+rms     = np.zeros(num_test, np.float32)
+log_rms = np.zeros(num_test, np.float32)
+abs_rel = np.zeros(num_test, np.float32)
+sq_rel  = np.zeros(num_test, np.float32)
+d1_all  = np.zeros(num_test, np.float32)
+a1      = np.zeros(num_test, np.float32)
+a2      = np.zeros(num_test, np.float32)
+a3      = np.zeros(num_test, np.float32)
+scalors = np.zeros(num_test, np.float32)
 
 
 def draw_images_ans_int(image_file):
@@ -50,21 +56,25 @@ def draw_images_ans_int(image_file):
     return ans_int_disp_map
 
 
-ans_int_disp_map=draw_images_ans_int(file_names[i])
+def abs_rel_error_single_image(i):
+	pred_depth=np.load(depth_map_dir+file_names[i] +'.npy')
+	pred_depth = cv2.resize(pred_depth, (416,128))
 
-gt_depth=bf/(ans_int_disp_map-d_inf)
+	ans_int_disp_map=draw_images_ans_int(file_names[i])
 
-mask = np.logical_and(gt_depth>min_depth,gt_depth <max_depth)
+	gt_depth=bf/(ans_int_disp_map-d_inf)
+
+	mask = np.logical_and(gt_depth>min_depth,gt_depth <max_depth)
+
+	scalor = np.median(gt_depth[mask])/np.median(pred_depth[mask])
+
+	pred_depth[mask] *= scalor
 
 
-scalor = np.median(gt_depth[mask])/np.median(pred_depth[mask])
+	pred_depth[pred_depth < min_depth] = min_depth
+	pred_depth[pred_depth > max_depth] = max_depth
 
-pred_depth[mask] *= scalor
-
-
-pred_depth[pred_depth < min_depth] = min_depth
-pred_depth[pred_depth > max_depth] = max_depth
-
+	abs_rel[i], sq_rel[i], rms[i], log_rms[i], a1[i], a2[i], a3[i] = compute_errors(gt_depth[mask], pred_depth[mask])
 
 
 def compute_errors(gt, pred):
@@ -86,18 +96,9 @@ def compute_errors(gt, pred):
     return abs_rel, sq_rel, rmse, rmse_log, a1, a2, a3
 
 
+for i in range(0,num_test):
+	abs_rel_error_single_image(i)
 
-rms     = np.zeros(num_test, np.float32)
-log_rms = np.zeros(num_test, np.float32)
-abs_rel = np.zeros(num_test, np.float32)
-sq_rel  = np.zeros(num_test, np.float32)
-d1_all  = np.zeros(num_test, np.float32)
-a1      = np.zeros(num_test, np.float32)
-a2      = np.zeros(num_test, np.float32)
-a3      = np.zeros(num_test, np.float32)
-scalors = np.zeros(num_test, np.float32)
-
-abs_rel[i], sq_rel[i], rms[i], log_rms[i], a1[i], a2[i], a3[i] = compute_errors(gt_depth[mask], pred_depth[mask])
 
 print("{:>10}, {:>10}, {:>10}, {:>10}, {:>10}, {:>10}, {:>10}, {:>10}, {:>10} ".format('abs_rel', 'sq_rel', 'rms', 'log_rms', 'd1_all', 'a1', 'a2', 'a3', 'scalor'))
 print("{:10.4f}, {:10.4f}, {:10.4f}, {:10.4f}, {:10.4f}, {:10.4f}, {:10.4f}, {:10.4f} ,{:10.4f} ".format(abs_rel.mean(), sq_rel.mean(), rms.mean(), log_rms.mean(), d1_all.mean(), a1.mean(), a2.mean(), a3.mean(),scalors.mean()))
