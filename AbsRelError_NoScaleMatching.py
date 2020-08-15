@@ -75,9 +75,8 @@ def abs_rel_error_single_image(i):
 	
 	
 	height=1.2
-	theta=85
-	theta=theta*math.pi/180
-	truth_z=height/math.cos(theta)
+	theta=0.1
+	truth_z=height/math.sin(theta)
 	center=calc_center()
 	prezent_z=pred_depth[center[0]][center[1]]
 	scalor=truth_z/prezent_z
