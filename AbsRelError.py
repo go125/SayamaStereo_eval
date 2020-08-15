@@ -29,21 +29,7 @@ num_test=1
 i=0
 
 
-file_names=["frame_000250.png"]
-#for file in os.listdir(save_path):
-    # Getting File Names
-    #if os.path.isfile(os.path.join(save_path, file)):
-        #file_names.append(os.path.basename(file))
-
-def draw_images(image_file):    
-    global save_path    
-    f_name=save_path+"/"+image_file
-    gray_img=cv2.imread(f_name)
-    return gray_img
-
-
-
-file_names_2 = ["frame_000250"]
+file_names = ["frame_000250"]
 #for file in os.listdir(save_path):
     #if os.path.isfile(os.path.join(save_path, file)):
         #file2 = file.rstrip('.png\n')
@@ -58,11 +44,13 @@ pred_depth = cv2.resize(pred_depth, (416,128))
 
 def draw_images_ans_int(image_file):
     global ans_int_disp_map_dir    
-    f_name=ans_int_disp_map_dir+"/"+image_file
+    f_name=ans_int_disp_map_dir+"/"+image_file+".png"
     ans_int_disp_map=cv2.imread(f_name)
     ans_int_disp_map=cv2.cvtColor(ans_int_disp_map, cv2.COLOR_RGB2GRAY)
     return ans_int_disp_map
 
+
+ans_int_disp_map=draw_images_ans_int(file_names[i])
 
 gt_depth=bf/(ans_int_disp_map-d_inf)
 
@@ -109,7 +97,7 @@ a2      = np.zeros(num_test, np.float32)
 a3      = np.zeros(num_test, np.float32)
 scalors = np.zeros(num_test, np.float32)
 
-abs_rel[i], sq_rel[i], rms[i], log_rms[i], a1[i], a2[i], a3[i] =             compute_errors(gt_depth[mask], pred_depth[mask])
+abs_rel[i], sq_rel[i], rms[i], log_rms[i], a1[i], a2[i], a3[i] = compute_errors(gt_depth[mask], pred_depth[mask])
 
 print("{:>10}, {:>10}, {:>10}, {:>10}, {:>10}, {:>10}, {:>10}, {:>10}, {:>10} ".format('abs_rel', 'sq_rel', 'rms', 'log_rms', 'd1_all', 'a1', 'a2', 'a3', 'scalor'))
 print("{:10.4f}, {:10.4f}, {:10.4f}, {:10.4f}, {:10.4f}, {:10.4f}, {:10.4f}, {:10.4f} ,{:10.4f} ".format(abs_rel.mean(), sq_rel.mean(), rms.mean(), log_rms.mean(), d1_all.mean(), a1.mean(), a2.mean(), a3.mean(),scalors.mean()))
