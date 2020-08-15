@@ -104,27 +104,3 @@ print("{:>10}, {:>10}, {:>10}, {:>10}, {:>10}, {:>10}, {:>10}, {:>10}, {:>10} ".
 print("{:10.4f}, {:10.4f}, {:10.4f}, {:10.4f}, {:10.4f}, {:10.4f}, {:10.4f}, {:10.4f} ,{:10.4f} ".format(abs_rel.mean(), sq_rel.mean(), rms.mean(), log_rms.mean(), d1_all.mean(), a1.mean(), a2.mean(), a3.mean(),scalors.mean()))
 
 
-
-import math
-height=1.2
-theta=85
-theta=theta*math.pi/180
-
-truth_z=height/math.cos(theta)
-#print(truth_z)
-
-
-def calc_center(xmin=0,ymin=0,img_height=128,img_width=416,clip_height=128,clip_width=416,dfv_height=128,dfv_width=416):
-    center_ratio_x=(img_height//2-xmin)/clip_height
-    center_ratio_y=(img_width//2-ymin)/clip_width
-    center_x=int(dfv_height*center_ratio_x)
-    center_y=int(dfv_width*center_ratio_y)
-    return [center_x,center_y]
-
-center=calc_center()
-
-#print(center[0])
-#print(center[1])
-
-prezent_z=pred_depth[center[0]][center[1]]
-#これだとうまくいかない
