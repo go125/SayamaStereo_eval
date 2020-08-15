@@ -27,12 +27,12 @@ bf=109.65
 d_inf=2.67
 
 
-file_names = ["frame_000250"]
-#file_names = []
-#for file in os.listdir(save_path):
-    #if os.path.isfile(os.path.join(save_path, file)):
-        #file_name = file.rstrip('.png\n')
-        #file_names.append(file_name)
+#file_names = ["frame_000250"]
+file_names = []
+for file in os.listdir(save_path):
+    if os.path.isfile(os.path.join(save_path, file)):
+        file_name = file.rstrip('.png\n')
+        file_names.append(file_name)
 
 
 num_test=len(file_names)
