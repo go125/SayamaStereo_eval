@@ -37,7 +37,7 @@ file_names = ["frame_000250"]
 
 
 
-pred_depth=np.load(depth_map_dir+file_names_2[i] +'.npy')
+pred_depth=np.load(depth_map_dir+file_names[i] +'.npy')
 pred_depth = cv2.resize(pred_depth, (416,128))
 
 
