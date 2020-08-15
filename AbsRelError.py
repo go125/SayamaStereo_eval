@@ -75,6 +75,8 @@ def abs_rel_error_single_image(i):
 	pred_depth[pred_depth > max_depth] = max_depth
 
 	abs_rel[i], sq_rel[i], rms[i], log_rms[i], a1[i], a2[i], a3[i] = compute_errors(gt_depth[mask], pred_depth[mask])
+	
+	print(str(i)+"/"+str(num_test))
 
 
 def compute_errors(gt, pred):
