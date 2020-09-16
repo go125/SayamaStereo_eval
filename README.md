@@ -1,6 +1,8 @@
 # MINATOView
 
-## How to use
+This repository contains the code used in the depth evaluation using the stereo video taken in Sayama (Saitama Prefecture).
+
+# How to use
 
 ## 1 Use ReadMovie.ipynb
 
