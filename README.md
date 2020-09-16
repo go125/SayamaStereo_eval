@@ -51,7 +51,7 @@ https://github.com/go125/depth_from_video_in_the_wild/blob/master/README.md
 
 ## 6 Use struct2depth_eval
 
-Please make evaluation numpy file before fine tuning.
+Please make evaluation numpy file after fine tuning.
 
 https://github.com/go125/struct2depth_eval
 
