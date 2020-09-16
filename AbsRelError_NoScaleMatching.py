@@ -17,17 +17,30 @@ import matplotlib.pyplot as plt
 import pickle
 import math
 
+
+#Raw images
 save_path = '/home/ubuntu/Sayama/tmpdir/2020_08_04/video1top_png/image_02/data/'
+
+#Mask images (These files may be used for the better evaluation in the future)
 #mask_path= = '/home/ubuntu/Sayama/tmpdir/2020_08_04/video1top_png/image_03/data/'
+
+#Depth maps (273486 = Before Fine Tuning, 279296 = After Fine Tuning)
 #depth_map_dir='/home/ubuntu/Sayama/result_video1top_273486/'
 depth_map_dir='/home/ubuntu/Sayama/result_video1top_279296/'
+
+#Disparity map
 ans_int_disp_map_dir="/home/ubuntu/Sayama/tmpdir/2020_08_04/video1middle_png/image_02/data"
+
+#Abs Rel Error Calculation Settings
 min_depth=5
 max_depth=80
+
+#Stereo Camera Parameters
 bf=109.65
 d_inf=2.67
 
 
+#Making file list
 #file_names = ["frame_000250"]
 file_names = []
 for file in os.listdir(save_path):
