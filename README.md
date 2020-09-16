@@ -37,6 +37,8 @@ nohup python GenData_makeMask.py --base_path /home/ubuntu/Sayama/all_video/ \
 
 ## 3 Use struct2depth_eval
 
+Please make evaluation numpy files and the finetuned models.
+
 https://github.com/go125/struct2depth_eval
 
 ## 4 Use AbsRelError.ipynb
