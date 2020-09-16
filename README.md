@@ -4,8 +4,7 @@
 
 ## 1 Use ReadMovie.ipynb
 
-30 fps video is converted to 10 fps. The video is cropped.
-By using raw avi file, download part is not needed.
+30 fps video is converted to 10 fps. The video is cropped. By using raw avi file, download part is not needed now.
 
 ## 2 Use GenData.py (crop images)
 
@@ -56,6 +55,10 @@ https://github.com/go125/struct2depth_eval
 
 ## 6 Use AbsRelError.ipynb or AbsRelError.py
 
+[Original](https://github.com/go125/SfmLearner_eval)
+
 Please calculate AbsRelError using these files.
+
+The calculation file is changed from the original so that stereo camera groundtruth is available.
 
 
