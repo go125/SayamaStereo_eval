@@ -5,6 +5,7 @@
 ## 1 Use ReadMovie.ipynb
 
 30 fps video is converted to 10 fps. The video is cropped.
+By using raw avi file, download part is not needed.
 
 ## 2 Use GenData.py (crop images)
 
