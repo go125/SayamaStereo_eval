@@ -1,4 +1,4 @@
-# MINATOView
+# SayamaStereo_eval
 
 This repository contains the code used in the depth evaluation using the stereo video taken in Sayama (Saitama Prefecture).
 
