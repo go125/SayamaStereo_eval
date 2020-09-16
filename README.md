@@ -75,6 +75,6 @@ The calculation file is changed from the original so that acceleration data is a
 
 You can get images in the paper.
 
-## Future
+# Future
 
 - MeasureLength.ipynb should be completed.
