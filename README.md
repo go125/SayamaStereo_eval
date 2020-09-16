@@ -75,7 +75,7 @@ The calculation file is changed from the original so that acceleration data is a
 
 [Original](https://github.com/go125/SfmLearner_eval)
 
-You can get images in the paper.
+You can get the images in the paper.
 
 # Future
 
