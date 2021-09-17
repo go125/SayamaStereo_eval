@@ -17,7 +17,7 @@ depth_map_dir = '/home/ubuntu/Sayama/result_video1top_279296/'
 
 # Disparity map
 ans_int_disp_map_dir = "/home/ubuntu/Sayama/tmpdir/2020_08_04/video1middle_png/image_02/data"
-ans_int_disp_map_dir_digit = "/home/ubuntu/Sayama/tmpdir/2020_08_04/video1bottom_png/image_02/data"
+ans_int_disp_map_dir_dec = "/home/ubuntu/Sayama/tmpdir/2020_08_04/video1bottom_png/image_02/data"
 
 # Abs Rel Error Calculation Settings
 min_depth = 5
@@ -56,19 +56,20 @@ def draw_images_ans_int(image_file):
     return ans_int_disp_map
 
 
-def draw_images_ans_digit(image_file):
-    global ans_int_disp_map_dir_digit
-    f_name = ans_int_disp_map_dir_digit + "/" + image_file + ".png"
-    ans_int_disp_map_digit = cv2.imread(f_name)
-    ans_int_disp_map_digit = cv2.cvtColor(ans_int_disp_map_digit, cv2.COLOR_RGB2GRAY)
-    return ans_int_disp_map_digit
+def draw_images_ans_dec(image_file):
+    global ans_int_disp_map_dir_dec
+    f_name = ans_int_disp_map_dir_dec + "/" + image_file + ".png"
+    ans_disp_map_dec= cv2.imread(f_name)
+    ans_disp_map_dec = cv2.cvtColor(ans_disp_map_dec, cv2.COLOR_RGB2GRAY)
+    return ans_disp_map_dec
 
 
 def abs_rel_error_single_image(i):
     pred_depth = np.load(depth_map_dir + file_names[i] + '.npy')
     pred_depth = cv2.resize(pred_depth, (416, 128))
     ans_int_disp_map = draw_images_ans_int(file_names[i])
-    # gt_depth = bf / (ans_int_disp_map + ans_int_disp_map//256 - d_inf)
+    ans_disp_map_dec = draw_images_ans_dec(file_names[i])
+    gt_depth = bf / (ans_int_disp_map + ans_disp_map_dec//256 - d_inf)
     # at this time, only int part is used
     gt_depth = bf / (ans_int_disp_map - d_inf)
     mask = np.logical_and(gt_depth > min_depth, gt_depth < max_depth)
