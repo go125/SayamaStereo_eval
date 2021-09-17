@@ -31,6 +31,7 @@ def extractFrames(pathIn, pathOut, option="None"):
 
         if ret:
             num += 1
+            # Convert to 30fps stereo video to 10fps
             if num % 3 == 0:
                 init_height, init_width = frame.shape[:2]
                 HEIGHT = init_height // 3
