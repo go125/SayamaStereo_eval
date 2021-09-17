@@ -81,3 +81,9 @@ You can get the images in the paper.
 
 - MeasureLength.ipynb should be completed.
   - [Original](https://github.com/go125/MeasureLengthTest)
+
+- Automated Script is made.
+
+```
+python GetAnswerDepth.py
+```
