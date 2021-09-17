@@ -81,3 +81,12 @@ You can get the images in the paper.
 
 - MeasureLength.ipynb should be completed.
   - [Original](https://github.com/go125/MeasureLengthTest)
+
+- Automated Script is made.
+
+```
+python GetAnswerDepth.py
+--AviFilePath /home/ubuntu/Sayama/data/StereoVideo/V2-mv-20200716103312-ulrg.avi \
+--video_name video1top \
+--FrameDir /home/ubuntu/data/stereovideo20210917
+```
