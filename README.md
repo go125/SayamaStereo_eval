@@ -86,7 +86,7 @@ You can get the images in the paper.
 
 ```
 python GetAnswerDepth.py \
---AviFilePath /home/ubuntu/Sayama/data/StereoVideo/V2-mv-20200716103312-ulrg.avi \
---video_name video1 \
---FrameDir /home/ubuntu/Sayama
+/home/ubuntu/Sayama/data/StereoVideo/V2-mv-20200716103312-ulrg.avi \
+video1 \
+/home/ubuntu/Sayama
 ```
