@@ -8,6 +8,15 @@ This repository contains the code used in the depth evaluation using the stereo 
 
 30 fps video is converted to 10 fps. The video is cropped. By using raw avi file, download part is not needed now.
 
+- Automated Script is made. (2021/09/17)
+
+```
+python GetAnswerDepth.py \
+/home/ubuntu/Sayama/data/StereoVideo/V2-mv-20200716103312-ulrg.avi \
+video1 \
+/home/ubuntu/Sayama
+```
+
 ## 2 Use GenData.py (Crop images)
 
 [Original](https://github.com/go125/PrepareDataForDFV)
@@ -82,11 +91,3 @@ You can get the images in the paper.
 - MeasureLength.ipynb should be completed.
   - [Original](https://github.com/go125/MeasureLengthTest)
 
-- Automated Script is made.
-
-```
-python GetAnswerDepth.py \
-/home/ubuntu/Sayama/data/StereoVideo/V2-mv-20200716103312-ulrg.avi \
-video1 \
-/home/ubuntu/Sayama
-```
