@@ -6,7 +6,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("AviFilePath", help="path_to_stereo_camera_avi",
                     default='/home/ubuntu/Sayama/data/StereoVideo/V2-mv-20200716103312-ulrg.avi', type=str)
 parser.add_argument("video_name", help="path_to_output_CSV_and_JPG_Dir",
-                    default='video1top', type=str)
+                    default='video1', type=str)
 parser.add_argument("FrameDir", help="path_to_output_Frame_Dir",
                     default='/home/ubuntu/Sayama',type=str)
 args = parser.parse_args()
