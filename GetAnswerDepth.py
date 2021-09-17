@@ -16,8 +16,7 @@ video_name = args.video_name
 FrameDir = args.FrameDir
 
 
-
-def extractFrames(pathIn, pathOut, option="None"):
+def extractFrames(pathIn, pathOut, option):
     num = 0
     if not os.path.exists(pathOut):
         os.mkdir(pathOut)
